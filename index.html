@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ISO 20700 Learning Activity</title>
+  <style>
+    :root {
+      --light-blue: #96ccd9;
+      --dark-blue: #025159;
+      --light-yellow: #f2d98d;
+      --dark-orange: #d98e04;
+      --light-grey: #f2f2f2;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: var(--light-grey);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 1000px;
+      width: 100%;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      display: block;
+    }
+
+    .nav-button {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 12px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      transition: 0.3s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: var(--dark-blue);
+    }
+
+    .nav-button:hover {
+      background-color: var(--dark-orange);
+    }
+
+    .prev {
+      left: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .dots {
+      text-align: center;
+      padding: 12px 0;
+      background-color: var(--light-blue);
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 12px;
+      width: 12px;
+      margin: 0 4px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: var(--dark-orange);
+    }
+  </style>
+</head>
+<body>
+
+<div class="slideshow-container">
+  <div class="slide"><img src="Developing-solutions-phases/1.png" alt="Slide 1"></div>
+  <div class="slide"><img src="Developing-solutions-phases/2.png" alt="Slide 2"></div>
+  <div class="slide"><img src="Developing-solutions-phases/3.png" alt="Slide 3"></div>
+  <div class="slide"><img src="Developing-solutions-phases/4.png" alt="Slide 4"></div>
+  <div class="slide"><img src="Developing-solutions-phases/5.png" alt="Slide 5"></div>
+  <div class="slide"><img src="Developing-solutions-phases/6.png" alt="Slide 6"></div>
+  <div class="slide"><img src="Developing-solutions-phases/7.png" alt="Slide 7"></div>
+  <div class="slide"><img src="Developing-solutions-phases/8.png" alt="Slide 8"></div>
+  <div class="slide"><img src="Developing-solutions-phases/9.png" alt="Slide 9"></div>
+
+  <a class="nav-button prev" onclick="changeSlide(-1)">❮</a>
+  <a class="nav-button next" onclick="changeSlide(1)">❯</a>
+</div>
+
+<div class="dots">
+  <span class="dot" onclick="showSlide(1)"></span>
+  <span class="dot" onclick="showSlide(2)"></span>
+  <span class="dot" onclick="showSlide(3)"></span>
+  <span class="dot" onclick="showSlide(4)"></span>
+  <span class="dot" onclick="showSlide(5)"></span>
+  <span class="dot" onclick="showSlide(6)"></span>
+  <span class="dot" onclick="showSlide(7)"></span>
+  <span class="dot" onclick="showSlide(8)"></span>
+  <span class="dot" onclick="showSlide(9)"></span>
+</div>
+
+<script>
+  let slideIndex = 1;
+  showSlide(slideIndex);
+
+  function changeSlide(n) {
+    showSlide(slideIndex += n);
+  }
+
+  function showSlide(n) {
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+  }
+</script>
+
+</body>
+</html>
