@@ -1,154 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ISO 20700 Learning Activity</title>
-  <style>
-    :root {
-      --light-blue: #96ccd9;
-      --dark-blue: #025159;
-      --light-yellow: #f2d98d;
-      --dark-orange: #d98e04;
-      --light-grey: #f2f2f2;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Slideshow: Capability, Communication, Risk, and Project Governance</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Global styles */
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; /* Light grey brand colour */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+  }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: var(--light-grey);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  /* Slideshow container */
+  .slideshow-container {
+    max-width: 900px; /* Max width for desktop view */
+    width: 100%; /* Fluid width */
+    position: relative;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure content stays within rounded corners */
+  }
 
+  /* Individual slides */
+  .mySlides {
+    display: none;
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+    overflow: hidden;
+    position: relative; /* For image positioning */
+  }
+
+  /* Image styling */
+  .mySlides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the slide area, cropping if necessary */
+    border-radius: 12px; /* Apply rounded corners to the image as well */
+  }
+
+  /* Next & previous buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 8px 8px 0;
+    user-select: none;
+    background-color: rgba(2, 81, 89, 0.7); /* Dark blue with transparency */
+    z-index: 10; /* Ensure buttons are above images */
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 8px 0 0 8px;
+  }
+
+  /* On hover, add a darker background color with a little more opacity */
+  .prev:hover, .next:hover {
+    background-color: rgba(217, 142, 4, 0.8); /* Dark orange with transparency */
+  }
+
+  /* The dots/circles */
+  .dots-container {
+    text-align: center;
+    padding: 15px;
+    background-color: #fff; /* White background for dots area */
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #96ccd9; /* Light blue brand colour */
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .active, .dot:hover {
+    background-color: #025159; /* Dark blue brand colour */
+  }
+
+  /* Fading animation */
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
     .slideshow-container {
-      position: relative;
-      max-width: 1000px;
-      width: 100%;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
+      margin: 10px;
     }
+  }
 
-    .slide {
-      display: none;
-      width: 100%;
+  @media (max-width: 480px) {
+    .prev, .next {
+      padding: 10px;
+      font-size: 16px;
     }
-
-    .slide img {
-      width: 100%;
-      display: block;
-    }
-
-    .nav-button {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 12px;
-      margin-top: -22px;
-      color: white;
-      font-weight: bold;
-      font-size: 24px;
-      transition: 0.3s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-      background-color: var(--dark-blue);
-    }
-
-    .nav-button:hover {
-      background-color: var(--dark-orange);
-    }
-
-    .prev {
-      left: 0;
-      border-radius: 3px 0 0 3px;
-    }
-
-    .next {
-      right: 0;
-      border-radius: 0 3px 3px 0;
-    }
-
-    .dots {
-      text-align: center;
-      padding: 12px 0;
-      background-color: var(--light-blue);
-    }
-
     .dot {
-      cursor: pointer;
       height: 12px;
       width: 12px;
-      margin: 0 4px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.3s ease;
+      margin: 0 3px;
     }
-
-    .active, .dot:hover {
-      background-color: var(--dark-orange);
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
 <div class="slideshow-container">
-  <div class="slide"><img src="Developing-solutions-phases/1.png" alt="Slide 1"></div>
-  <div class="slide"><img src="Developing-solutions-phases/2.png" alt="Slide 2"></div>
-  <div class="slide"><img src="Developing-solutions-phases/3.png" alt="Slide 3"></div>
-  <div class="slide"><img src="Developing-solutions-phases/4.png" alt="Slide 4"></div>
-  <div class="slide"><img src="Developing-solutions-phases/5.png" alt="Slide 5"></div>
-  <div class="slide"><img src="Developing-solutions-phases/6.png" alt="Slide 6"></div>
-  <div class="slide"><img src="Developing-solutions-phases/7.png" alt="Slide 7"></div>
-  <div class="slide"><img src="Developing-solutions-phases/8.png" alt="Slide 8"></div>
-  <div class="slide"><img src="Developing-solutions-phases/9.png" alt="Slide 9"></div>
 
-  <a class="nav-button prev" onclick="changeSlide(-1)">❮</a>
-  <a class="nav-button next" onclick="changeSlide(1)">❯</a>
+  <!-- Full-width images with number and caption text -->
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/1" alt="Capability Clause 4.4.5 - Image 1" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+1+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/2" alt="Capability Clause 4.4.5 - Image 2" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+2+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/3" alt="Communication Clause 4.4.6 - Image 3" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+3+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/4" alt="Communication Clause 4.4.6 - Image 4" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+4+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/5" alt="Risk and Quality Management Clause 4.4.11 - Image 5" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+5+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/6" alt="Risk and Quality Management Clause 4.4.11 - Image 6" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+6+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/7" alt="Risk and Quality Management Clause 4.4.11 - Image 7" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+7+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/8" alt="Risk and Quality Management Clause 4.4.11 - Image 8" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+8+Unavailable';">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="http://googleusercontent.com/file_content/9" alt="Project Governance Clause 4.4.4 - Image 9" onerror="this.onerror=null;this.src='https://placehold.co/900x506/cccccc/333333?text=Image+9+Unavailable';">
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
 </div>
+<br>
 
-<div class="dots">
-  <span class="dot" onclick="showSlide(1)"></span>
-  <span class="dot" onclick="showSlide(2)"></span>
-  <span class="dot" onclick="showSlide(3)"></span>
-  <span class="dot" onclick="showSlide(4)"></span>
-  <span class="dot" onclick="showSlide(5)"></span>
-  <span class="dot" onclick="showSlide(6)"></span>
-  <span class="dot" onclick="showSlide(7)"></span>
-  <span class="dot" onclick="showSlide(8)"></span>
-  <span class="dot" onclick="showSlide(9)"></span>
+<!-- The dots/circles -->
+<div class="dots-container">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+  <span class="dot" onclick="currentSlide(4)"></span>
+  <span class="dot" onclick="currentSlide(5)"></span>
+  <span class="dot" onclick="currentSlide(6)"></span>
+  <span class="dot" onclick="currentSlide(7)"></span>
+  <span class="dot" onclick="currentSlide(8)"></span>
+  <span class="dot" onclick="currentSlide(9)"></span>
 </div>
 
 <script>
   let slideIndex = 1;
-  showSlide(slideIndex);
+  let autoSlideTimeout; // Variable to hold the timeout for auto-slide
 
-  function changeSlide(n) {
-    showSlide(slideIndex += n);
-  }
+  // Function to show slides
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
 
-  function showSlide(n) {
-    const slides = document.getElementsByClassName("slide");
-    const dots = document.getElementsByClassName("dot");
-
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+    // Loop back to the first slide if current slide is beyond the last
+    if (n > slides.length) {
+      slideIndex = 1
+    }
+    // Loop to the last slide if current slide is before the first
+    if (n < 1) {
+      slideIndex = slides.length
     }
 
-    for (let i = 0; i < dots.length; i++) {
+    // Hide all slides and remove 'active' class from dots
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
     }
 
+    // Display the current slide and mark the corresponding dot as 'active'
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
+
+    // Clear any existing auto-slide timeout and set a new one
+    clearTimeout(autoSlideTimeout);
+    autoSlideTimeout = setTimeout(() => plusSlides(1), 5000); // Change image every 5 seconds
+  }
+
+  // Function to navigate to the next/previous slide
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  // Function to navigate to a specific slide using dots
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  // Initial display of the first slide and start auto-slide when the window loads
+  window.onload = function() {
+    showSlides(slideIndex);
+  };
+
+  // Keyboard navigation (left/right arrow keys)
+  document.addEventListener('keydown', function(event) {
+    if (event.key === "ArrowLeft") {
+      plusSlides(-1);
+    } else if (event.key === "ArrowRight") {
+      plusSlides(1);
+    }
+  });
+
+  // Touch/Swipe navigation
+  let touchstartX = 0;
+  let touchendX = 0;
+
+  const slideshowElement = document.querySelector('.slideshow-container');
+
+  slideshowElement.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+  }, false);
+
+  slideshowElement.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    handleGesture();
+  }, false);
+
+  function handleGesture() {
+    if (touchendX < touchstartX) { // Swiped left
+      plusSlides(1);
+    }
+    if (touchendX > touchstartX) { // Swiped right
+      plusSlides(-1);
+    }
   }
 </script>
 
